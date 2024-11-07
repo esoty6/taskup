@@ -1,10 +1,10 @@
-<button>
+<button (click)="onUserClick()">
   <img
+    [src]="imageSrc"
+    [alt]="userName"
     loading="eager"
-    src="https://thispersondoesnotexist.com/"
     referrerpolicy="no-referrer"
     sizes="32px"
-    alt="A person."
   />
-  <span>{{ selectedUser.name }}</span>
+  <span>{{ userName }}</span>
 </button>

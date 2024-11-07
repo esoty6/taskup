@@ -11,9 +11,24 @@ import { getRandomElement } from '../../utils/utlis';
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  protected selectedUser: User;
+  private selectedUser: User;
 
   constructor() {
+    this.selectedUser = getRandomElement(MOCK_USERS);
+  }
+
+  get userName(): string {
+    return this.selectedUser.name;
+  }
+
+  get imageSrc(): string {
+    return 'https://thispersondoesnotexist.com/'.concat(
+      '?ts=',
+      Date.now().toString()
+    );
+  }
+
+  protected onUserClick(): void {
     this.selectedUser = getRandomElement(MOCK_USERS);
   }
 }
