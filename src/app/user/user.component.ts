@@ -1,13 +1,5 @@
-import {
-  Component,
-  computed,
-  Signal,
-  signal,
-  WritableSignal,
-} from '@angular/core';
-import { MOCK_USERS } from '../../mocks/mock-users';
+import { Component, computed, input, InputSignal, Signal } from '@angular/core';
 import { User } from '../../types/user.type';
-import { getRandomElement } from '../../utils/utlis';
 
 @Component({
   selector: 'app-user',
@@ -17,20 +9,17 @@ import { getRandomElement } from '../../utils/utlis';
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  private selectedUser: WritableSignal<User> = signal<User>(
-    getRandomElement(MOCK_USERS)
-  );
-  protected userName: Signal<string> = computed(() => this.selectedUser().name);
+  readonly user: InputSignal<User> = input.required<User>();
+
+  protected userName: Signal<string> = computed(() => this.user().name);
   protected imageSrc: Signal<string> = computed(() =>
     'https://thispersondoesnotexist.com/'.concat(
       '?ts=',
       Date.now().toString(),
       '&user=',
-      this.selectedUser().id.toString()
+      this.user().id.toString()
     )
   );
 
-  protected onUserClick(): void {
-    this.selectedUser.set(getRandomElement(MOCK_USERS));
-  }
+  protected onUserClick(): void {}
 }
