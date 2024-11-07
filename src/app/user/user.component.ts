@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { MOCK_USERS } from '../../mocks/mock-users';
 import { User } from '../../types/user.type';
 import { getRandomElement } from '../../utils/utlis';
@@ -11,14 +11,14 @@ import { getRandomElement } from '../../utils/utlis';
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  private selectedUser: User;
+  private selectedUser: WritableSignal<User>;
 
   constructor() {
-    this.selectedUser = getRandomElement(MOCK_USERS);
+    this.selectedUser = signal<User>(getRandomElement(MOCK_USERS));
   }
 
   get userName(): string {
-    return this.selectedUser.name;
+    return this.selectedUser().name;
   }
 
   get imageSrc(): string {
@@ -29,6 +29,6 @@ export class UserComponent {
   }
 
   protected onUserClick(): void {
-    this.selectedUser = getRandomElement(MOCK_USERS);
+    this.selectedUser.set(getRandomElement(MOCK_USERS));
   }
 }
