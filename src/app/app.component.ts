@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
-import { MOCK_USERS } from '../mocks/mock-users';
-import { User } from '../types/user.type';
-import { getRandomElement } from '../utils/utlis';
+import { Component, signal } from '@angular/core';
+import { User } from '../types/user.types';
 import { HeaderComponent } from './header/header.component';
-import { UserComponent } from './user/user.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HeaderComponent, UserComponent],
+  imports: [HeaderComponent, UserListComponent, TasksComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  protected user: User = getRandomElement(MOCK_USERS);
+  protected user = signal<User | null>(null);
+
+  protected onUserClick(user: User): void {
+    this.user.set(user);
+  }
 }
