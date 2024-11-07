@@ -1,5 +1,5 @@
 import { Component, computed, input, output } from '@angular/core';
-import { User } from '../../../types/user.types';
+import { type User } from './user.model';
 
 @Component({
   selector: 'app-user',
@@ -10,6 +10,7 @@ import { User } from '../../../types/user.types';
 })
 export class UserComponent {
   readonly user = input.required<User>();
+  readonly active = input.required<boolean>();
 
   protected select = output<User>();
 

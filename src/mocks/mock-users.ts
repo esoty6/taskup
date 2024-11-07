@@ -1,4 +1,4 @@
-import { User } from '../types/user.types';
+import { type User } from '../app/user-list/user/user.model';
 
 export const MOCK_USERS: User[] = [
   {
@@ -31,4 +31,4 @@ export const MOCK_USERS: User[] = [
     name: 'Arjun Singh',
     avatar: 'user-6.jpg',
   },
-];
+] satisfies User[];

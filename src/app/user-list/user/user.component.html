@@ -1,4 +1,4 @@
-<button (click)="onUserClick()">
+<button [class.active]="active()" (click)="onUserClick()">
   <img
     [src]="imageSrc()"
     [alt]="userName()"
