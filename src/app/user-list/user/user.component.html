@@ -1,10 +1,12 @@
-<button [class.active]="active()" (click)="onUserClick()">
-  <img
-    [src]="imageSrc()"
-    [alt]="userName()"
-    loading="eager"
-    referrerpolicy="no-referrer"
-    sizes="32px"
-  />
-  <span>{{ userName() }}</span>
-</button>
+<app-card>
+  <button [class.active]="active()" (click)="onUserClick()">
+    <img
+      [src]="imageSrc()"
+      [alt]="userName()"
+      loading="eager"
+      referrerpolicy="no-referrer"
+      sizes="32px"
+    />
+    <span>{{ userName() }}</span>
+  </button>
+</app-card>

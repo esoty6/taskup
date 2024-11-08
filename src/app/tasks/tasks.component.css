@@ -48,8 +48,6 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-height: 50vh;
-  overflow: auto;
 }
 
 @media (min-width: 768px) {

@@ -3,7 +3,7 @@ import { MOCK_TASKS } from '../../mocks/mock-tasks';
 import { type User } from '../user-list/user/user.model';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { TaskComponent } from './task/task.component';
-import { type Task } from './task/task.model';
+import { type NewTask, type Task } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -30,7 +30,19 @@ export class TasksComponent {
     this.isAddingTask.set(true);
   }
 
-  protected onStopAddTask(): void {
+  protected onCancelAddTask(): void {
+    this.isAddingTask.set(false);
+  }
+
+  protected onAddTask(newTask: NewTask): void {
+    const taskToAdd = {
+      ...newTask,
+      id: crypto.randomUUID(),
+      userId: this.user().id,
+    };
+
+    this.tasks.update((tasks) => [taskToAdd, ...tasks]);
+
     this.isAddingTask.set(false);
   }
 }
