@@ -1,5 +1,5 @@
 <app-card>
-  <button [class.active]="active()" (click)="onUserClick()">
+  <button [class.active]="isActive()" (click)="onUserClick()">
     <img
       [src]="imageSrc()"
       [alt]="userName()"

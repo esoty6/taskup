@@ -1,7 +1,6 @@
-import { Component, output, signal } from '@angular/core';
-import { MOCK_USERS } from '../../mocks/mock-users';
+import { Component, inject } from '@angular/core';
+import { UserListService } from './user-list.service';
 import { UserComponent } from './user/user.component';
-import { type User } from './user/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -11,13 +10,6 @@ import { type User } from './user/user.model';
   styleUrl: './user-list.component.css',
 })
 export class UserListComponent {
-  protected users = signal<User[]>(MOCK_USERS);
-  protected selectedUser = signal<User | undefined>(undefined);
-
-  protected select = output<User>();
-
-  protected onUserClick(user: User) {
-    this.select.emit(user);
-    this.selectedUser.set(user);
-  }
+  private userListService = inject(UserListService);
+  protected users = this.userListService.getAllUsers();
 }

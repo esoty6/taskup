@@ -1,5 +1,6 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { CardComponent } from '../../ui/card/card.component';
+import { UserListService } from '../user-list.service';
 import { type User } from './user.model';
 
 @Component({
@@ -11,16 +12,19 @@ import { type User } from './user.model';
 })
 export class UserComponent {
   readonly user = input.required<User>();
-  readonly active = input.required<boolean>();
-
-  protected select = output<User>();
 
   protected userName = computed(() => this.user().name);
   protected imageSrc = computed(() =>
     'assets/users/'.concat(this.user().avatar)
   );
 
+  private userListService = inject(UserListService);
+
   protected onUserClick(): void {
-    this.select.emit(this.user());
+    this.userListService.setUser(this.user());
+  }
+
+  protected isActive(): boolean {
+    return this.user().id === this.userListService.getSelectedUser()()?.id;
   }
 }
